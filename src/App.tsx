@@ -3,107 +3,45 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './components/login'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  makeStyles,
-  Container,
-  Typography,
-  TextField,
-  Button,
-} from "@material-ui/core";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-interface IFormInput {
-  email: string;
-  firstName: string;
-  password: string;
-}
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { sign } from 'crypto';
+import Sign from './components/sign';
 
-const schema = yup.object().shape({
-  email: yup.string().required().email(),
-  firstName: yup.string().required().min(2).max(25),
-  password: yup.string().required().min(8).max(120),
-});
+function Index(){
+     return <h2>Home</h2>;
+  }
 
-const useStyles = makeStyles((theme) => ({
-  heading: {
-    textAlign: "center",
-    margin: theme.spacing(1, 0, 4),
-  },
-  submitButton: {
-    marginTop: theme.spacing(4),
-  },
-}));
-
-function App() {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>({
-    resolver: yupResolver(schema),
-  });
+  function AppRouter() {
+      return (
+       <Router>
+         <header style={{ background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)' }}>
+                <ul className="nav justify-content-center">
+                  <li className="nav-item active">
+                    <Link to="/components/sign" className="nav-link" style={{ color: '#FFF' }}>Sign up</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/App" className="nav-link" style={{ color: '#FFF' }}>Home</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/components/Login" className="nav-link" style={{ color: '#FFF' }}>Login</Link>
+                  </li>
+                </ul>
+           <Route path="/App" exact component={App} />
+           <Route path="/components/Sign" exact component={Sign} />
+           <Route path="/components/login" component={Login} />
+         </header>
+         </Router>
+      );
+     }
   
-  const { heading, submitButton } = useStyles();
+  function App() {
+    return (
+      <div>
+        
+      </div>
+    );
+  }
+  
 
-  const [json, setJson] = useState<string>();
-
-  const onSubmit = (data: IFormInput) => {
-    setJson(JSON.stringify(data));
-  };
-
-  return (
-    <Container maxWidth="xs">
-      <Typography className={heading} variant="h3">
-        Sign Up Form
-      </Typography>
-      <form>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          label="Email"
-          fullWidth
-          required
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          label="First Name"
-          fullWidth
-          required
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          label="Password"
-          type="password"
-          fullWidth
-          required
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={submitButton}
-        >
-          Sign Up
-        </Button>
-        {json && (
-          <>
-            <Typography variant="body1">
-              Below is the JSON that would normally get passed to the server
-              when a form gets submitted
-            </Typography>
-            <Typography variant="body2">{json}</Typography>
-          </>
-        )}
-      </form>
-    </Container>
-  );
-}
-
-export default App ;
+export default AppRouter ;
