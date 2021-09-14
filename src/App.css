@@ -3,5 +3,15 @@ nav-link{
 }
 
 .container{
-  color:white;
+  color:grey;
+}
+
+.header {
+  background-color: #F0F8FF;
+  padding-bottom:15px;
+  padding-top: 10px;
+}
+
+ul {
+  list-style-type: none;
 }

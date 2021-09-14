@@ -7,6 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { sign } from 'crypto';
 import Sign from './components/sign';
+import { useState } from 'react';
+import { TodoList } from './todolist';
+import { AddTodoForm } from './addtodoform';
 
 function Index(){
      return <h2>Home</h2>;
@@ -15,32 +18,85 @@ function Index(){
   function AppRouter() {
       return (
        <Router>
-         <header style={{ background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)' }}>
+         <div className="header">
                 <ul className="nav justify-content-center">
                   <li className="nav-item active">
-                    <Link to="/components/sign" className="nav-link" style={{ color: '#FFF' }}>Sign up</Link>
+                    <Link to="/components/sign" className="nav-link" style={{ color: 'grey' }}>Sign up</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/App" className="nav-link" style={{ color: '#FFF' }}>Home</Link>
+                    <Link to="/App" className="nav-link" style={{ color: 'grey' }}>Home</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/components/Login" className="nav-link" style={{ color: '#FFF' }}>Login</Link>
+                    <Link to="/components/Login" className="nav-link" style={{ color: 'grey' }}>Login</Link>
                   </li>
                 </ul>
            <Route path="/App" exact component={App} />
            <Route path="/components/Sign" exact component={Sign} />
            <Route path="/components/login" component={Login} />
-         </header>
+         </div>
          </Router>
       );
      }
-  
+
+    
+     interface Props {
+      todo: Todo;
+      toggleTodo: ToggleTodo;
+    }
+
+    export const TodoListItem: React.FC<Props> = ({ todo, toggleTodo }) => {
+      return (
+        <li>
+          <label
+            style={{ textDecoration: todo.complete ? 'line-through' : undefined }}>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onClick={() => {
+                toggleTodo(todo);
+              }}
+            />{' '}
+            {todo.text}
+          </label>
+        </li>
+      );
+    };
+
+    const initialTodos: Todo[] =  [
+      {
+        text: 'Walk the dog',
+        complete: false,
+      },
+      {
+        text: 'Write app',
+        complete: true,
+      },
+    ];
   function App() {
+    const [todos, setTodos] = useState(initialTodos);
+    const toggleTodo = (selectedTodo: Todo) => {
+      const newTodos = todos.map(todo => {
+        if (todo === selectedTodo) {
+          return {
+            ...todo,
+            complete: !todo.complete,
+          };
+        }
+        return todo;
+      });
+      setTodos(newTodos);
+    };
+
+    const addTodo: AddTodo = (text: string) => {
+      const newTodo = { text, complete: false };
+      setTodos([...todos, newTodo]);
+    };
     return (
-      <div>
-        
-      </div>
-    );
+      <>
+        <TodoList todos={todos} toggleTodo={toggleTodo} />
+        <AddTodoForm addTodo={addTodo} />
+      </>
+      );
   }
   
 
