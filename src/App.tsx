@@ -5,7 +5,6 @@ import Login from './components/login'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { sign } from 'crypto';
 import Sign from './components/sign';
 import { useState } from 'react';
 import { TodoList } from './todolist';
@@ -46,16 +45,9 @@ function Index(){
 
     export const TodoListItem: React.FC<Props> = ({ todo, toggleTodo }) => {
       return (
-        <li>
-          <label
-            style={{ textDecoration: todo.complete ? 'line-through' : undefined }}>
-            <input
-              type="checkbox"
-              checked={todo.complete}
-              onClick={() => {
-                toggleTodo(todo);
-              }}
-            />{' '}
+        <li className="Message">
+          <label>
+            {' '}
             {todo.text}
           </label>
         </li>
