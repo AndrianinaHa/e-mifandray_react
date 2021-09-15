@@ -9,7 +9,7 @@ function Navigation() {
     <div className="header">
       <nav className="navbar navbar-expand ">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/" style={{ color:'grey' }} >
             E-mifandray RABETSIMAMANGA Harena IGGLIA3 n66
           </Link>
 
