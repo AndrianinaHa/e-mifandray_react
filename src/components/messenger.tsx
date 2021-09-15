@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AddTodoForm } from './addtodoform';
 import { TodoList } from "./todolist";
+import './css/mess.css';
+import { transform } from "typescript";
 
 
 interface Props {
@@ -9,23 +11,34 @@ interface Props {
 
   export const TodoListItem: React.FC<Props> = ({ todo }) => {
     return (
-      <li className="Message">
-        <label>
-          {' '}
-          {todo.text}
-        </label>
-      </li>
+      <div className="chat">
+        <table>
+        <tr>
+          <div className="bubble you">
+              <td>
+                <label>
+                {todo.text}
+                </label>
+              </td>
+          </div>
+        </tr>
+        <tr>
+          <div className="bubble me">
+            <td>
+            <label>
+              
+            </label>
+            </td>
+          </div>
+        </tr>
+        </table>
+      </div>
     );
   };
 
   const initialTodos: Todo[] =  [
     {
-      text: 'Hey! ',
-      complete: false,
-    },
-    {
-      text: 'How are you doing?',
-      complete: true,
+      text: "I'm RABETSIMAMANGA Ikoriantsoa Harena Andrianina IGGLIA 3 n 66"
     },
   ];
 
@@ -33,7 +46,7 @@ interface Props {
     const [todos, setTodos] = useState(initialTodos);
 
     const addTodo: AddTodo = (text: string) => {
-      const newTodo = { text, complete: false };
+      const newTodo = { text };
       setTodos([...todos, newTodo]);
     };
     return (

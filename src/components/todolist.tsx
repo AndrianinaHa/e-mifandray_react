@@ -1,6 +1,5 @@
 import React from 'react';
-import { TodoListItem } from './todolistitem';
-import '../App.css'
+import { TodoListItem } from './messenger';
 
 interface Props {
   todos: Todo[];

@@ -17,8 +17,15 @@ function Navigation() {
             <ul className="navbar-nav ml-auto">
               <li
                 className='nav-item'
+                >
+                  <Link className="nav-link" to="/home" style={{ color:'grey' }}>
+                    Home
+                  </Link>
+              </li>
+              <li
+                className='nav-item'
               >
-                <Link className="nav-link" to="/todolistitem" style={{ color:'grey' }}>
+                <Link className="nav-link" to="/messenger" style={{ color:'grey' }}>
                   Messages
                 </Link>
               </li>
@@ -29,6 +36,7 @@ function Navigation() {
                   Login
                 </Link>
               </li>
+              
               <li
                 className='nav-item'
               >
