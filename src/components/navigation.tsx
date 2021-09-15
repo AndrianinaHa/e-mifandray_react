@@ -10,7 +10,7 @@ function Navigation() {
       <nav className="navbar navbar-expand ">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            E-mifandray
+            E-mifandray RABETSIMAMANGA Harena IGGLIA3 n66
           </Link>
 
           <div className="justify-content-center" >
